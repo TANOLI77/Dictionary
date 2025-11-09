@@ -1,0 +1,121 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "id": "d0b6b800",
+      "metadata": {
+        "id": "d0b6b800"
+      },
+      "source": [
+        "# Login System (3 Attempts + Dictionary)\n",
+        "This Colab notebook lets you register multiple users and then log in with a 3-attempt limit.\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "id": "0ca1c516",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "0ca1c516",
+        "outputId": "1169a831-3faf-458b-c940-e4c2236c238d"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "===== ACCOUNT SETUP =====\n",
+            "How many accounts do you want to create? 2\n",
+            "Enter username for user 1: Hazarvi\n",
+            "Enter password for Hazarvi: Pakistan810@@\n",
+            "Enter username for user 2: Tanoli\n",
+            "Enter password for Tanoli: 1122\n",
+            "\n",
+            "===== LOGIN PANEL =====\n",
+            "Enter your username: Hazarvi\n",
+            "Enter your password: Pakistan810@@\n",
+            "Login Successful! Welcome, Hazarvi.\n",
+            "\n",
+            "===== USER DATABASE (For Admin View) =====\n",
+            "{'Hazarvi': 'Pakistan810@@', 'Tanoli': '1122'}\n"
+          ]
+        }
+      ],
+      "source": [
+        "# -------------------------------\n",
+        "# Login System with 3 Attempts and User Database\n",
+        "# -------------------------------\n",
+        "\n",
+        "print(\"===== ACCOUNT SETUP =====\")\n",
+        "user_database = {}\n",
+        "\n",
+        "# Step 1: Take number of users\n",
+        "total_users = int(input(\"How many accounts do you want to create? \"))\n",
+        "\n",
+        "# Step 2: Register each user\n",
+        "for i in range(total_users):\n",
+        "    username = input(f\"Enter username for user {i + 1}: \")\n",
+        "    password = input(f\"Enter password for {username}: \")\n",
+        "    user_database[username] = password\n",
+        "\n",
+        "print(\"\\n===== LOGIN PANEL =====\")\n",
+        "login_user = input(\"Enter your username: \")\n",
+        "\n",
+        "# Step 3: Verify username\n",
+        "if login_user in user_database:\n",
+        "    max_attempts = 3\n",
+        "    for attempt in range(max_attempts):\n",
+        "        login_pass = input(\"Enter your password: \")\n",
+        "\n",
+        "        if login_pass == user_database[login_user]:\n",
+        "            print(f\"Login Successful! Welcome, {login_user}.\")\n",
+        "            break\n",
+        "        else:\n",
+        "            print(f\"Incorrect password. Attempts left: {max_attempts - attempt - 1}\")\n",
+        "\n",
+        "        if attempt == max_attempts - 1:\n",
+        "            print(\"Too many failed attempts. Access locked.\")\n",
+        "else:\n",
+        "    print(\"Username not found. Please create an account first.\")\n",
+        "\n",
+        "print(\"\\n===== USER DATABASE (For Admin View) =====\")\n",
+        "print(user_database)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "37af5a29",
+      "metadata": {
+        "id": "37af5a29"
+      },
+      "source": [
+        "**How to use**\n",
+        "1. Run the code cell above.\n",
+        "2. Enter how many users to register (e.g., 2).\n",
+        "3. Provide usernames and passwords.\n",
+        "4. Try logging in. You get 3 attempts.\n",
+        "\n",
+        "**Test values**\n",
+        "- User: `ali`, Pass: `4321`\n",
+        "- User: `hira`, Pass: `9876`\n"
+      ]
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "language_info": {
+      "name": "python"
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
